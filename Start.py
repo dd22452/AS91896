@@ -61,16 +61,6 @@ TeamMembers = {
 
 }
 
-def add_tasks():
-    """"Allows the user to add a new task to the dictionary"""
-
-    title = easygui.enterbox("Enter new task title.")
-    desc = easygui.enterbox("Enter task description.")
-    assignee = easygui.enterbox("Enter team member ID (or leave empty):")
-    priority = int(easygui.enterbox("Enter priority (1-5):"))
-    status = easygui.choicebox("Select status", choices=["Not started", "In progress", "Blocked"])
-    add_tasks =(title, desc, assignee, if assignee else None, priority, status)
-
 def create_task():
     """Allows the user to create a new profile"""
 
@@ -80,7 +70,7 @@ def create_task():
     priority = easygui.ccbox ("Create a new description")
     Status = easygui.enterbox ("Create new box")
 
-def remove_task()
+def remove_task():
     "Allows the user to remove a task from the dictionary"
 
     title = easygui.enterbox("Remove the new task (str)")
@@ -100,3 +90,47 @@ def Update_tasks():
     """Allows the user to edit aspects of the task from their dictionary"""
 
     task_id = easygui.enterbox("Enter task title")
+
+def print():
+    """
+    Prints all tasks.
+    """
+
+    output = ""
+
+    for task_id, task_info in Tasks.items():
+        output += f"\n{task_id}\n"
+
+        for key in task_info:
+            output += f"{key}: {task_info[key]}\n"
+
+
+    easygui.msgbox(output)
+
+
+def show_menu():
+    """
+    Shows the user the main menu and returns the users choice.
+    """
+
+    options = {
+        "Create Task": create_task,
+        "Print all tasks": print,
+        "Exit": exit
+    }
+
+    get_input = "Y"
+
+    while get_input == "Y":
+        msg = "What would you like to do?"
+        title = "sda"
+        choices = []
+
+        for items in options:
+            choices.append(items)
+
+        selection = easygui.buttonbox(msg, title, choices)
+
+        get_input = options[selection]()
+
+show_menu()
