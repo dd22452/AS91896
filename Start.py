@@ -73,9 +73,125 @@ def main_menu():
             break
         elif choice == "Exit":
             break
-       
-       
 
+def task_search():
+    """Allows the user to search for a task"""
+
+    output =""
+    search_task = []
+    for titles in tasks:
+         search_task.append(titles)
+
+    msg = "What tasks would you like to search for?"
+    title = "Task Search"
+
+    search_choice = easygui.choicebox(msg, title, search_task)
+
+    output = ""
+
+    task_info = tasks[search_choice]
+
+    for key, info in task_info.items():
+        output += f"{key}:{info}\n"
+
+    easygui.msgbox(output)
+
+def member_search():
+    """Search for a team member"""
+
+    members = []
+    for member in Team_members:
+        members.append(member)
+
+    msg = "What member do you want to search for?"
+    title = "Member Search"
+    choice = easygui.choicebox(msg, title, members)
+
+    if choice == None:
+        return
+
+    member_info = Team_members[choice]
+    output = ""
+
+
+
+    for key, info in member_info.items():
+        output += f"{key}:{info}\n"
+
+    # info = Team_members[choice]
+
+    easygui.msgbox(output)
+
+def edit_task():
+    """Allows the user to edit tasks"""
+
+    output = ""
+    task_titles = []
+    for titles in tasks:
+            task_titles.append(titles)
+
+    msg = "What tasks would you like to edit in the details off?"
+    title = "Tasks CHOICE"
+
+    tasks_choice = easygui.choicebox(msg, title, task_titles )
+    if tasks_choice is None:
+        return
+
+    task_info = []
+
+    for task_information in tasks[tasks_choice]:
+        task_info.append(task_information)
+
+    msg = f"What detail of {tasks_choice} would you like to edit?"
+    title = "EDIT CHOICE"
+
+    edit_choice = easygui.choicebox(msg, title, task_info)
+
+    msg = f"Enter the new {edit_choice} for  {tasks_choice}"
+    title = f"ENTER NEW INFORMATION"
+
+
+    tasks[tasks_choice][edit_choice] = easygui.enterbox(msg, title)
+
+def add_tasks():
+    title = easygui.enterbox("Enter the new title for your task:", "Add task")
+    if title == None:
+        return
+   
+    Description = easygui.enterbox("Enter your new task description for your new task", "Add task")
+    if Description == None:
+        return
+
+    Assignee = easygui.enterbox("Enter the new Assignee for your new task", "Add task")
+    if Assignee == None:
+        return
+
+    Priority = easygui.enterbox("Enter the priority of the new task", "Add new task")
+    if Priority == None:
+        return
+    try:
+        Priority = int(Priority)
+    except ValueError:
+            easygui.msgbox("Priority must be a valid number")
+
+    status = easygui.enterbox("Enter the status of the new task", "Add task")
+    if status == None:
+        return
+
+
+def print_all():
+    output = "Tasks:\n"
+    for tasks_name, task_info in sorted(tasks.items()):
+        output += f"\n{tasks_name}\n"
+        for key in task_info:
+            output += f"{key}: {task_info[key]}\n"
+    easygui.msgbox(output, "All Tasks")
+    return "Y"
+
+
+    
+
+    
 def generate_report():
     generated_task ={"tasks completed": 0 ,"Number od tasks": 0 ,"Number of tasks blocked": 0 ,"Number of taks not started": 0}
 main_menu()
