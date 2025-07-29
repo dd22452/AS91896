@@ -58,9 +58,9 @@ Team_members = {
 def main_menu():
     options = {
     "Edit task": edit_task,
-    "Print All task": print_all,
+    "Print All Tasks": print_all,
     "Add task": add_tasks,
-    "search": search,
+    "search": task_search,
     "Generate Report": generate_report,
     "Exit": lambda: "N",
     }
@@ -178,6 +178,25 @@ def add_tasks():
     if status == None:
         return
 
+    new_task = {
+    "Title": title,
+    "Description": Description,
+    "Assignee": Assignee,
+    "Priority": Priority,
+    "status": status,
+               }
+
+    new_task_id = f"T{len(tasks) + 1}"
+   
+    tasks[new_task_id] = new_task
+
+    easygui.msgbox(f"Game '{title}' added successfully with rank {new_task_id}.", "Success")
+    return "Y"
+
+def generate_report():
+    generated_task ={"tasks completed": 0 ,"Number od tasks": 0 ,"Number of tasks blocked": 0 ,"Number of taks not started": 0}
+
+
 
 def print_all():
     output = "Tasks:\n"
@@ -188,10 +207,22 @@ def print_all():
     easygui.msgbox(output, "All Tasks")
     return "Y"
 
-
     
 
     
 def generate_report():
+    """Generates a report of tasks"""
+
+    task_dict ={}
+
+    for task_name, task_info in tasks.items():
+        task = task_info["tasks"]
+        if task not in task_dict:
+            task_dict[task] = []
+        tasks_dict[task].append(task_name)
+
+    output = "Games by Genre:\n"
+    for task, task_names in task_dict.items():
+        output += f"{task}: {','.join(task_names)}\n"
     generated_task ={"tasks completed": 0 ,"Number od tasks": 0 ,"Number of tasks blocked": 0 ,"Number of taks not started": 0}
 main_menu()
