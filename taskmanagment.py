@@ -60,7 +60,7 @@ def main_menu():
     "Edit task": edit_task,
     "Print All Tasks": print_all,
     "Add task": add_tasks,
-    "search": task_search,
+    "Search": task_search,
     "Generate Report": generate_report,
     "Exit": lambda: "N",
     }
@@ -158,15 +158,18 @@ def add_tasks():
     if title == None:
         return
    
-    Description = easygui.enterbox("Enter your new task description for your new task", "Add task")
+    Description = easygui.enterbox("Enter your new task description "
+    "for your new task", "Add task")
     if Description == None:
         return
 
-    Assignee = easygui.enterbox("Enter the new Assignee for your new task", "Add task")
+    Assignee = easygui.enterbox("Enter the new Assignee for your new task",
+                                 "Add task")
     if Assignee == None:
         return
 
-    Priority = easygui.enterbox("Enter the priority of the new task", "Add new task")
+    Priority = easygui.enterbox("Enter the priority of the new task", 
+                                "Add new task")
     if Priority == None:
         return
     try:
@@ -190,11 +193,13 @@ def add_tasks():
    
     tasks[new_task_id] = new_task
 
-    easygui.msgbox(f"Game '{title}' added successfully with rank {new_task_id}.", "Success")
+    easygui.msgbox(f"Game '{title}' added successfully with rank{new_task_id}"
+                   , "Success")
     return "Y"
 
 def generate_report():
-    generated_task ={"tasks completed": 0 ,"Number od tasks": 0 ,"Number of tasks blocked": 0 ,"Number of taks not started": 0}
+    generated_task ={"tasks completed": 0 ,"Number od tasks": 0 ,"Number of "
+    "tasks blocked": 0 ,"Number of taks not started": 0}
 
 
 
@@ -213,16 +218,17 @@ def print_all():
 def generate_report():
     """Generates a report of tasks"""
 
-    task_dict ={}
+    task_count ={}
 
-    for task_name, task_info in tasks.items():
-        task = task_info["tasks"]
-        if task not in task_dict:
-            task_dict[task] = []
-        tasks_dict[task].append(task_name)
+    for task, tasks in tasks:
+        task = task [task]["tasks"]
+        if task in task_count:
+            task_count[task] = []
+        task_count[task]
 
-    output = "Games by Genre:\n"
-    for task, task_names in task_dict.items():
+    output = "Tasks by Task:\n"
+    for task, task_names in task_count.items():
         output += f"{task}: {','.join(task_names)}\n"
-    generated_task ={"tasks completed": 0 ,"Number od tasks": 0 ,"Number of tasks blocked": 0 ,"Number of taks not started": 0}
+    generated_task ={"tasks completed": 0 ,"Number od tasks": 0 ,"Number of "
+    "tasks blocked": 0 ,"Number of taks not started": 0}
 main_menu()
