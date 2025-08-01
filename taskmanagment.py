@@ -56,6 +56,9 @@ Team_members = {
 }
 
 def main_menu():
+    '''
+        Prints main menu       
+    '''
     options = {
     "Edit task": edit_task,
     "Print All Tasks": print_all,
@@ -75,7 +78,10 @@ def main_menu():
             break
 
 def task_search():
-    """Allows the user to search for a task"""
+    '''
+        This function adds a button that when clicked allows the user to 
+        search for a task.
+    '''
 
     output =""
     search_task = []
@@ -97,6 +103,10 @@ def task_search():
     easygui.msgbox(output)
 
 def member_search():
+    '''
+        This function adds a button that when pressed allows 
+        the user to search for a team member 
+    '''
     """Search for a team member"""
 
     members = []
@@ -123,6 +133,9 @@ def member_search():
     easygui.msgbox(output)
 
 def edit_task():
+    '''
+    
+    '''
     """Allows the user to edit tasks"""
 
     output = ""
@@ -154,6 +167,10 @@ def edit_task():
     tasks[tasks_choice][edit_choice] = easygui.enterbox(msg, title)
 
 def add_tasks():
+    '''
+    This function adds a button that allows the user to add a task into the 
+    program
+    '''
     title = easygui.enterbox("Enter the new title for your task:", "Add task")
     if title == None:
         return
@@ -198,6 +215,9 @@ def add_tasks():
     return "Y"
 
 def generate_report():
+    '''
+    
+    '''
     not_started = 0
     blocked = 0
     in_progress = 0
@@ -227,6 +247,10 @@ Completed: {completed}", title="Progress Report")
 
 
 def print_all():
+    '''
+        This fiunction adds a button that when pressed
+        prints all tasks in the program
+    '''
     output = "Tasks:\n"
     for tasks_name, task_info in sorted(tasks.items()):
         output += f"\n{tasks_name}\n"
@@ -239,7 +263,11 @@ def print_all():
 
     
 def generate_report():
-    """Generates a report of tasks"""
+    '''
+        This function adds a button that
+        when pressed prints a report of the
+        status of the tasks
+    '''
 
     task_count ={}
 
@@ -252,6 +280,7 @@ def generate_report():
     output = "Tasks by Task:\n"
     for task, task_names in task_count.items():
         output += f"{task}: {','.join(task_names)}\n"
-    generated_task ={"tasks completed": 0 ,"Number od tasks": 0 ,"Number of "
+    generated_task ={"tasks completed": 0 ,"Number od tasks": 0 ,
+                     "Number of "
     "tasks blocked": 0 ,"Number of taks not started": 0}
 main_menu()
