@@ -198,8 +198,31 @@ def add_tasks():
     return "Y"
 
 def generate_report():
-    generated_task ={"tasks completed": 0 ,"Number od tasks": 0 ,"Number of "
-    "tasks blocked": 0 ,"Number of taks not started": 0}
+    not_started = 0
+    blocked = 0
+    in_progress = 0
+    completed = 0
+
+    for task_id, task in tasks.items():
+
+        for key, value in task.items():
+
+            if key == "Status":
+               
+                if value == "Not Started":
+                    not_started += 1
+                elif value == "Blocked":
+                    blocked += 1
+                elif value == "In Progress":
+                    in_progress += 1
+                elif value == "Completed":
+                    completed += 1
+                   
+    easygui.msgbox(f"Not Started: {not_started}\n\
+Blocked: {blocked}\nIn progress: {in_progress}\n\
+Completed: {completed}", title="Progress Report")
+
+    
 
 
 
